@@ -27,7 +27,7 @@ class Estudiante(db.Model):
         return "<LastName: {}>".format(self.LastName), "<FirstName: {}>".format(self.FirstName)
 
 # vistas
-# @app.route("/")
+#@app.route("/")
 @app.route("/", methods=["GET", "POST"])
 def home():
     # return "My flask app"
@@ -43,10 +43,12 @@ def home():
     
 @app.route("/update", methods=["POST"])
 def update():
-    newtitle = request.form.get("newtitle")
+    newLastName= request.form.get("newLastName")
+    newFirstName = request.form.get("newFirstName")
     idEstudiante = request.form.get("idEstudiante")
-    estudiante = Estudiante.query.get(idlibro)
-    estudiante.title = newtitle
+    estudiante = Estudiante.query.get(idEstudiante)
+    estudiante.LastName = newLastName
+    estudiante.FirstName = newFirstName
     db.session.commit()
     return redirect("/")  
 #

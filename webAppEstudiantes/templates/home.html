@@ -1,37 +1,82 @@
-<html>
-  <body>
-    <h1>Agregar Estudiante</h1>
-    <form method="POST" action="/">
-      <input type="text" name="LastName">
-      <input type="text" name="FirstName">
-      <input type="submit" value="Add">
-    </form>
-    <h1>Books</h1>
+</html>
+<!DOCTYPE html>
+<html lang="en">
 
-    <table>
-      {% for estudiante in estudiantes %}
-      <tr>
-        <td>
-          <p>{{estudiante.LastName}} {{estudiante.FirstName}}</p>
-        </td>
-        <td>
-          <form method="POST" action="./update">
-            <input type="hidden" value="{{estudiante.id}}" name="idEstudiante">
-            <input type="text" value="{{estudiante.LastName}} {{estudiante.FirstName}}" name="newtitle">
-            <input type="submit" value="Update">
-          </form>
-        </td>
+<head>
+    <meta charset="UTF-8">
+    <title>Diego Pinto | App Web </title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
 
-        <td>
-            <form method="POST" action="./delete" style="display: inline">
-              <input type="hidden" value="{{estudiante.id}}" name="idEstudiante">
-              <input type="submit" value="Delete">
-            </form>
-          </td>
-       </tr>
+<body>
+    <div class="jumbotron text-center">
+        <h1>Diego Pinto | App Web</h1>
+        <p> Una app-flask-sqlalchemy</p>
+        <p><strong>Registro, actualización y eliminación de estudiantes de colegio Calasanz</strong></p>
+    </div>
+    <div class="text-center container-fluid">
+        <h1>Agregar Estudiante</h1><br>
+        <form method="POST" action="/">
+            <input type="text" name="FirstName" placeholder="Nombres">
+            <input type="text" name="LastName" placeholder="Apellidos"><br><br>
+            <input type="submit" value="Add" class="btn btn-primary" placeholder="Nombres">
+        </form>
+    </div>
+    <section class="jumbotron">
+        <div style="margin-left:3em">
+            <h1>Estudiantes</h1>
+            <input type="submit" value="Editar" id='buttonSHOW' class="btn btn-warning">
+            <input type="submit" value="Ocultar" id="buttonhide" class="btn btn-warning"><br><br>
+        </div>
+        <div class="text-center">
+            <center>
+                <table class="table table-striped" style="width: 60%">
+                    <them>
+                        <th>id</th>
+                        <th>Nombre Estudiante</th>
+                    </them>
+                    {% for estudiante in estudiantes %}
 
-      {% endfor %}
+                    <tr>
+                        <td>{{estudiante.id}} </td>
 
-    </table>
-  </body>
+
+                        <td>
+                            <p>{{estudiante.LastName}} {{estudiante.FirstName}}
+                                <div style="display:none" class="editar">
+                                    <form method="POST" action="./update">
+                                        <input type="hidden" value="{{estudiante.id}}" name="idEstudiante">
+                                        <input type="text" value="{{estudiante.LastName}}" name="newLastName">
+                                        <input type="text" value="{{estudiante.FirstName}}" name="newFirstName">
+                                        <input type="submit" value="Update" class="btn btn-success">
+                                    </form>
+                                    <form method="POST" action="./delete" style="display: inline">
+                                        <input type="hidden" value="{{estudiante.id}}" name="idEstudiante">
+                                        <input type="submit" value="Delete" class="btn btn-info">
+                                    </form>
+                                </div>
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+
+                </table>
+            </center>
+        </div>
+    </section>
+    <script>
+        $(document).ready(function() {
+            $("#buttonSHOW").click(function() {
+                $(".editar").show();
+            });
+            $("#buttonhide").click(function() {
+                $(".editar").hide();
+            });
+        });
+    </script>
+
+</body>
+
 </html>
