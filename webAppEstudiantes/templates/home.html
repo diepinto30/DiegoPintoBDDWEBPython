@@ -1,0 +1,37 @@
+<html>
+  <body>
+    <h1>Agregar Estudiante</h1>
+    <form method="POST" action="/">
+      <input type="text" name="LastName">
+      <input type="text" name="FirstName">
+      <input type="submit" value="Add">
+    </form>
+    <h1>Books</h1>
+
+    <table>
+      {% for estudiante in estudiantes %}
+      <tr>
+        <td>
+          <p>{{estudiante.LastName}} {{estudiante.FirstName}}</p>
+        </td>
+        <td>
+          <form method="POST" action="./update">
+            <input type="hidden" value="{{estudiante.id}}" name="idEstudiante">
+            <input type="text" value="{{estudiante.LastName}} {{estudiante.FirstName}}" name="newtitle">
+            <input type="submit" value="Update">
+          </form>
+        </td>
+
+        <td>
+            <form method="POST" action="./delete" style="display: inline">
+              <input type="hidden" value="{{estudiante.id}}" name="idEstudiante">
+              <input type="submit" value="Delete">
+            </form>
+          </td>
+       </tr>
+
+      {% endfor %}
+
+    </table>
+  </body>
+</html>
